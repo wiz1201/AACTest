@@ -24,3 +24,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    lifecycle_version = "2.2.0"
+    room_version = "2.2.5"
+    rx_java2 = "2.2.19"
+    rx_kotlin = "2.4.0"
+    rx_android = "2.1.1"
+    retrofit_version = "2.9.0"
+    okhttp_version = "4.8.0"
+    glide_version = "4.11.0"
+}
