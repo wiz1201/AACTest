@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AAC Test</string>
+
+    <string name="menu_name_api">API</string>
+    <string name="menu_name_local">LOCAL</string>
+    <string name="menu_name_rx">RX</string>
 </resources>
