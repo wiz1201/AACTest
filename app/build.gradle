@@ -47,7 +47,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    //RXJava
+    // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java2"
     // RxKotlin
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rx_kotlin"
