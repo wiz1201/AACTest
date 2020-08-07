@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@+id/navigation_api">
+
+    <fragment
+        android:id="@+id/navigation_api"
+        android:name="com.sumin.aactest.APIFragment"
+        android:label="@string/menu_name_api"
+        tools:layout="@layout/fragment_api" />
+
+    <fragment
+        android:id="@+id/navigation_rx"
+        android:name="com.sumin.aactest.RxFragment"
+        android:label="@string/menu_name_rx"
+        tools:layout="@layout/fragment_rx" />
+
+    <fragment
+        android:id="@+id/navigation_local"
+        android:name="com.sumin.aactest.LocalFragment"
+        android:label="@string/menu_name_local"
+        tools:layout="@layout/fragment_local" />
+
+</navigation>
