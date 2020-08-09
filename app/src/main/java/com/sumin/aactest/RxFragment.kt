@@ -37,10 +37,11 @@ class RxFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val apiAdapter = APIFragmentAdapter{
-            model.clickLike(it.login)
+        val apiAdapter = RxAdapter{
+//            model.clickLike(it.login)
             Toast.makeText(activity, "${it.login}", Toast.LENGTH_SHORT).show()
         }
+
         mRxRecycler.apply {
             adapter = apiAdapter
         }
