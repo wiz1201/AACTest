@@ -8,12 +8,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.sumin.aactest.APIFragmentAdapter
 import com.sumin.aactest.LocalFragmentAdapter
 import com.sumin.aactest.R
+import com.sumin.aactest.RxAdapter
 import com.sumin.aactest.data.User
 import com.sumin.aactest.data.UserItems
 
 @BindingAdapter("app:items")
 fun setItems(recyclerView: RecyclerView, items: List<UserItems>?) {
     (recyclerView.adapter as APIFragmentAdapter).setUsers(items)
+}
+
+@BindingAdapter("app:rxitems")
+fun setRxItems(recyclerView: RecyclerView, items: List<UserItems>?) {
+    (recyclerView.adapter as RxAdapter).setUsers(items)
 }
 
 @BindingAdapter("app:users")
