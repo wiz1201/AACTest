@@ -3,29 +3,30 @@ package com.sumin.aactest.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.sumin.aactest.R
 import com.sumin.aactest.data.UserItems
 import com.sumin.aactest.databinding.RowApiBinding
 
 class APIFragmentAdapter(
     private val listner: (UserItems, Int) -> Unit
-) : BaseAdapter() {
+) : RecyclerView.Adapter<UserHolder>() {
     val TAG : String = APIFragmentAdapter::class.java.simpleName
 
     lateinit var rowBinding: RowApiBinding
     private var userItems: List<UserItems> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
         rowBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),
             R.layout.row_api, parent, false)
-        return BaseViewHolder(rowBinding)
+        return UserHolder(rowBinding)
     }
 
     override fun getItemCount(): Int {
         return userItems.size
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.bind(userItems[position], listner)
     }
 
@@ -37,11 +38,10 @@ class APIFragmentAdapter(
     }
 }
 
-class UserHolder(binding : RowApiBinding) : BaseViewHolder(binding) {
+class UserHolder(binding : RowApiBinding) : RecyclerView.ViewHolder(binding.root) {
     val userBinding = binding
-    override fun bind(item: Any, listnerr: (item: Any, res: Int) -> Unit) {
-        super.bind(item, listnerr)
 
+    fun bind(item: Any, listnerr: (item: UserItems, res: Int) -> Unit) {
         if (item is UserItems){
             userBinding.user = item
             userBinding.mLikeBtn.setOnClickListener{
