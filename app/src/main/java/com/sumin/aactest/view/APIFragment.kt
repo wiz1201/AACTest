@@ -1,4 +1,4 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.sumin.aactest.R
 import com.sumin.aactest.data.User
 import com.sumin.aactest.data.UserItems
 import com.sumin.aactest.databinding.FragmentApiBinding
@@ -30,7 +31,8 @@ class APIFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil
-            .inflate(inflater, R.layout.fragment_api, container, false)
+            .inflate(inflater,
+                R.layout.fragment_api, container, false)
 
         binding.vm = model
         binding.lifecycleOwner =  viewLifecycleOwner
@@ -41,25 +43,27 @@ class APIFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val apiAdapter = APIFragmentAdapter{ item: UserItems, res:Int ->
+        val apiAdapter =
+            APIFragmentAdapter { item: UserItems, res: Int ->
 
-            when(res){
-                R.id.mLikeBtn ->{
-                    val user = User(
-                        item.id.toString(),
-                        item.login,
-                        item.avatar_url,
-                        false
-                    )
-                    model.addDB(user)
-                    Toast.makeText(activity, "${item.login}가 추가 되었습니다.", Toast.LENGTH_SHORT).show()
-                }
+                when (res) {
+                    R.id.mLikeBtn -> {
+                        val user = User(
+                            item.id.toString(),
+                            item.login,
+                            item.avatar_url,
+                            false
+                        )
+                        model.addDB(user)
+                        Toast.makeText(activity, "${item.login}가 추가 되었습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
 
-                R.id.rowRoot -> {
-                    startWebActivity(item.html_url, item.login)
+                    R.id.rowRoot -> {
+                        startWebActivity(item.html_url, item.login)
+                    }
                 }
             }
-        }
         mApiRecycler.apply {
             adapter = apiAdapter
         }

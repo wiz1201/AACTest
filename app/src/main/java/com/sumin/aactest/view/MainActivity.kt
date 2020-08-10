@@ -1,4 +1,4 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.sumin.aactest.R
 import com.sumin.aactest.databinding.ActivityMainBinding
 import com.sumin.aactest.utilities.InjectorUtils
 import com.sumin.aactest.viewmodel.APIViewModel
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding : ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
+            DataBindingUtil.setContentView(this,
+                R.layout.activity_main
+            )
         binding.vm = model
         binding.lifecycleOwner = this
 
@@ -41,7 +44,10 @@ class MainActivity : AppCompatActivity() {
     fun initNavigation(){
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_api, R.id.navigation_rx, R.id.navigation_local))
+            R.id.navigation_api,
+            R.id.navigation_rx,
+            R.id.navigation_local
+        ))
         setupActionBarWithNavController(navController, appBarConfiguration)
         mBottomNavi.setupWithNavController(navController)
 
