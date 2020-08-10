@@ -30,8 +30,10 @@ class APIViewModel(
     private val _isLike = MutableLiveData<Boolean>()
     val isLike : LiveData<Boolean> = _isLike
 
-    fun getItems(userName: String) = viewModelScope.launch(Dispatchers.IO) {
-        _userItems.postValue(searchRepository.getItems(userName))
+    fun getItems(userName: String) {
+        viewModelScope.launch {
+            _userItems.postValue(searchRepository.getItemsCoroutine(userName))
+        }
     }
 
     fun getRxItems(userName: String) {

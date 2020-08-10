@@ -21,7 +21,6 @@ interface APIService {
     @GET("search/users")
     suspend fun searchCoroutine(@Query("q") user: String?): UserResponse
 
-
     /**
      * Github User 검색(sort와 order는 기본값 사용)
      * @param user 검색하고자 하는 유져 ID

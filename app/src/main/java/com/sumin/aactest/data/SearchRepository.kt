@@ -9,9 +9,9 @@ import retrofit2.Response
 class SearchRepository(private val gitHubService : APIService) {
     private val TAG = SearchRepository::class.java.simpleName
 
-    suspend fun getItems(userName: String) = gitHubService.searchCoroutine(userName).items
+    suspend fun getItemsCoroutine(userName: String) = gitHubService.searchCoroutine(userName).items
 
-    fun getItemsCall(userName: String) : List<UserItems> {
+    fun getItems(userName: String) : List<UserItems> {
         var data : List<UserItems> = emptyList()
 
         gitHubService.searchCall(userName).enqueue(object: Callback<UserResponse> {
