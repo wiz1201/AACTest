@@ -1,4 +1,4 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.sumin.aactest.R
 import com.sumin.aactest.databinding.FragmentLocalBinding
 import com.sumin.aactest.utilities.InjectorUtils
 import com.sumin.aactest.viewmodel.APIViewModel
@@ -25,7 +26,8 @@ class LocalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil
-            .inflate(inflater, R.layout.fragment_local, container, false)
+            .inflate(inflater,
+                R.layout.fragment_local, container, false)
 
         binding.vm = model
         binding.lifecycleOwner =  viewLifecycleOwner

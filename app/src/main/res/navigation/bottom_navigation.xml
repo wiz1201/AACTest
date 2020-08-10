@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_api"
-        android:name="com.sumin.aactest.APIFragment"
+        android:name="com.sumin.aactest.view.APIFragment"
         android:label="@string/menu_name_api"
         tools:layout="@layout/fragment_api" />
 
     <fragment
         android:id="@+id/navigation_rx"
-        android:name="com.sumin.aactest.RxFragment"
+        android:name="com.sumin.aactest.view.RxFragment"
         android:label="@string/menu_name_rx"
         tools:layout="@layout/fragment_rx" />
 
     <fragment
         android:id="@+id/navigation_local"
-        android:name="com.sumin.aactest.LocalFragment"
+        android:name="com.sumin.aactest.view.LocalFragment"
         android:label="@string/menu_name_local"
         tools:layout="@layout/fragment_local" />
 

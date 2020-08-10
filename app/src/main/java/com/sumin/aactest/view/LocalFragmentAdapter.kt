@@ -1,9 +1,10 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sumin.aactest.R
 import com.sumin.aactest.data.User
 import com.sumin.aactest.databinding.RowLocalBinding
 
@@ -15,7 +16,8 @@ class LocalFragmentAdapter() :
     private var userItems : List<User> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalUserHolder {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.row_local, parent, false)
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+            R.layout.row_local, parent, false)
         return LocalUserHolder(binding)
     }
 

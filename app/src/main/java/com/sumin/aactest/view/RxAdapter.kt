@@ -1,9 +1,10 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sumin.aactest.R
 import com.sumin.aactest.data.UserItems
 import com.sumin.aactest.databinding.RowRxBinding
 
@@ -12,7 +13,8 @@ class RxAdapter(val onClick: (item: UserItems) -> Unit) : RecyclerView.Adapter<U
     var userList : List<UserItems> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolderRx {
-        rowBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.row_rx, parent, false)
+        rowBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+            R.layout.row_rx, parent, false)
         return UserHolderRx(rowBinding)
     }
 

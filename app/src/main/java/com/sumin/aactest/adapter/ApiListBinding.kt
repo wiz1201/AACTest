@@ -5,10 +5,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.sumin.aactest.APIFragmentAdapter
-import com.sumin.aactest.LocalFragmentAdapter
+import com.sumin.aactest.view.APIFragmentAdapter
+import com.sumin.aactest.view.LocalFragmentAdapter
 import com.sumin.aactest.R
-import com.sumin.aactest.RxAdapter
+import com.sumin.aactest.view.RxAdapter
 import com.sumin.aactest.data.User
 import com.sumin.aactest.data.UserItems
 

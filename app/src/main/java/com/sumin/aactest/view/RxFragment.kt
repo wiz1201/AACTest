@@ -1,4 +1,4 @@
-package com.sumin.aactest
+package com.sumin.aactest.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.sumin.aactest.R
 import com.sumin.aactest.databinding.FragmentRxBinding
 import com.sumin.aactest.utilities.InjectorUtils
 import com.sumin.aactest.viewmodel.APIViewModel
@@ -27,7 +28,8 @@ class RxFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil
-            .inflate(inflater, R.layout.fragment_rx, container, false)
+            .inflate(inflater,
+                R.layout.fragment_rx, container, false)
         binding.vm = model
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -37,7 +39,7 @@ class RxFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val apiAdapter = RxAdapter{
+        val apiAdapter = RxAdapter {
 //            model.clickLike(it.login)
             Toast.makeText(activity, "${it.login}", Toast.LENGTH_SHORT).show()
         }
