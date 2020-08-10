@@ -44,6 +44,25 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_api, R.id.navigation_rx, R.id.navigation_local))
         setupActionBarWithNavController(navController, appBarConfiguration)
         mBottomNavi.setupWithNavController(navController)
+        mBottomNavi.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.navigation_api -> {
+                    Log.e(TAG, "navigation_api Click")
+                    mSearch.setText("")
+                }
+
+                R.id.navigation_rx -> {
+                    Log.e(TAG, "navigation_rx Click")
+                    mSearch.setText("")
+                }
+
+                R.id.navigation_local -> {
+                    Log.e(TAG, "navigation_local Click")
+                    mSearch.setText("")
+                }
+            }
+            true
+        }
     }
 
     /**
@@ -52,16 +71,18 @@ class MainActivity : AppCompatActivity() {
     fun initEditText(){
         mSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                when(mBottomNavi.selectedItemId) {
-                    R.id.navigation_api -> {
-                        getUserAPI(s.toString())
-                    }
+                if (!(s.isNullOrEmpty())) {
+                    when (mBottomNavi.selectedItemId) {
+                        R.id.navigation_api -> {
+                            getUserAPI(s.toString())
+                        }
 
-                    R.id.navigation_rx -> {
-                        getUserRxAPI(s.toString())
-                    }
+                        R.id.navigation_rx -> {
+                            getUserRxAPI(s.toString())
+                        }
 
-                    R.id.navigation_local -> {
+                        R.id.navigation_local -> {
+                        }
                     }
                 }
             }
@@ -79,9 +100,8 @@ class MainActivity : AppCompatActivity() {
      * @param user 검색하고자 하는 유져 ID
      * */
     fun getUserAPI(user : String) {
-        Log.e("API", "getUserAPI${user}")
-//        model.getData(user)
-        model.getItems(user)
+        Log.e(TAG, "getUserAPI${user}")
+        model.getItemsCoroutine(user)
     }
 
     /**
@@ -89,8 +109,7 @@ class MainActivity : AppCompatActivity() {
      * @param user 검색하고자 하는 유져 ID
      * */
     fun getUserRxAPI(user : String) {
-        Log.e("API", "getUserAPI${user}")
+        Log.e(TAG, "getUserRxAPI${user}")
         model.getRxItems(user)
     }
-
 }

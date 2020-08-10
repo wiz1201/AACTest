@@ -11,6 +11,8 @@ class SearchRepository(private val gitHubService : APIService) {
 
     suspend fun getItemsCoroutine(userName: String) = gitHubService.searchCoroutine(userName).items
 
+    fun getRxItems(userName: String) = gitHubService.searchRx(userName)
+
     fun getItems(userName: String) : List<UserItems> {
         var data : List<UserItems> = emptyList()
 
@@ -27,7 +29,6 @@ class SearchRepository(private val gitHubService : APIService) {
                     data = emptyList()
                     Log.e(TAG, userResponse.message())
                 }
-
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
@@ -37,26 +38,4 @@ class SearchRepository(private val gitHubService : APIService) {
 
         return data
     }
-
-/*
-    fun getRxItems(userName: String) : List<UserItems> {
-        var data : Observable List<UserItems> = emptyList()
-
-        gitHubService.searchRx(userName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ userResponse ->
-                val items : List<UserItems> = userResponse.items
-                Log.e(TAG, "성공 : ${items?.size}")
-                data = items
-            }, { thowable ->
-                Log.d(TAG, "실패 : ${thowable.message}")
-            }, {
-                Log.d(TAG, "Complete")
-            })
-
-        return data
-    }
-*/
-
 }
