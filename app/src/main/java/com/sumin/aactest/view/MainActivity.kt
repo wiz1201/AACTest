@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_api, R.id.navigation_rx, R.id.navigation_local))
         setupActionBarWithNavController(navController, appBarConfiguration)
         mBottomNavi.setupWithNavController(navController)
+
         mBottomNavi.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_api -> {

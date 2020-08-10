@@ -1,5 +1,6 @@
 package com.sumin.aactest
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sumin.aactest.data.User
+import com.sumin.aactest.data.UserItems
 import com.sumin.aactest.databinding.FragmentApiBinding
 import com.sumin.aactest.utilities.InjectorUtils
 import com.sumin.aactest.viewmodel.APIViewModel
@@ -39,18 +41,35 @@ class APIFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val apiAdapter = APIFragmentAdapter{
-            val user = User(
-                it.id.toString(),
-                it.login,
-                it.avatar_url,
-                false
-            )
-            model.addDB(user)
-            Toast.makeText(activity, "${it.login}가 추가 되었습니다.", Toast.LENGTH_SHORT).show()
+        val apiAdapter = APIFragmentAdapter{ item: UserItems, res:Int ->
+
+            when(res){
+                R.id.mLikeBtn ->{
+                    val user = User(
+                        item.id.toString(),
+                        item.login,
+                        item.avatar_url,
+                        false
+                    )
+                    model.addDB(user)
+                    Toast.makeText(activity, "${item.login}가 추가 되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.rowRoot -> {
+                    startWebActivity(item.html_url, item.login)
+                }
+            }
         }
         mApiRecycler.apply {
             adapter = apiAdapter
         }
+    }
+
+    fun startWebActivity(htmlUrl: String, title: String){
+        val intent = Intent(requireContext(), BaseWebView::class.java)
+        intent.putExtra("url", htmlUrl)
+        intent.putExtra("title", title)
+        startActivity(intent)
+        Toast.makeText(activity, "Git으로 이동합니다.", Toast.LENGTH_SHORT).show()
     }
 }
