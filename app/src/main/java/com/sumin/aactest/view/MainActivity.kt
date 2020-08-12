@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         InjectorUtils.getAPIViewModelFactory(this)
     }
 
+    private var apiData = ""
+    private var rxData = ""
+    private var localData = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,24 +55,23 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         mBottomNavi.setupWithNavController(navController)
 
-        mBottomNavi.setOnNavigationItemSelectedListener {
-            when(it.itemId){
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when(destination.id) {
                 R.id.navigation_api -> {
                     Log.e(TAG, "navigation_api Click")
-                    mSearch.setText("")
+                    mSearch.setText(apiData)
                 }
 
                 R.id.navigation_rx -> {
                     Log.e(TAG, "navigation_rx Click")
-                    mSearch.setText("")
+                    mSearch.setText(rxData)
                 }
 
                 R.id.navigation_local -> {
                     Log.e(TAG, "navigation_local Click")
-                    mSearch.setText("")
+                    mSearch.setText(localData)
                 }
             }
-            true
         }
     }
 
@@ -89,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         R.id.navigation_local -> {
+                            findUsersLocal(s.toString())
                         }
                     }
                 }
@@ -108,6 +112,7 @@ class MainActivity : AppCompatActivity() {
      * */
     fun getUserAPI(user : String) {
         Log.e(TAG, "getUserAPI${user}")
+        apiData = user
         model.getItemsCoroutine(user)
     }
 
@@ -117,6 +122,17 @@ class MainActivity : AppCompatActivity() {
      * */
     fun getUserRxAPI(user : String) {
         Log.e(TAG, "getUserRxAPI${user}")
+        rxData = user
         model.getRxItems(user)
+    }
+
+    /**
+     * Github 유져 검색 Room Database
+     * @param user 검색하고자 하는 유져 ID
+     * */
+    fun findUsersLocal(user: String){
+        Log.e(TAG, "getAllUsersLocal : ${user}")
+        localData = user
+        model.findUser(user)
     }
 }

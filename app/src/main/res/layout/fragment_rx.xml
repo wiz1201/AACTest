@@ -12,14 +12,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#44000000"
+        android:background="#4400f000"
         tools:context="com.sumin.aactest.view.RxFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRxRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:rxitems="@{vm.userItems}"
+            app:rxitems="@{vm.userRxItems}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
