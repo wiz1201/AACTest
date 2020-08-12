@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sumin.aactest.R
 import com.sumin.aactest.data.UserItems
 import com.sumin.aactest.databinding.RowApiBinding
+import org.greenrobot.eventbus.EventBus
 
 class APIFragmentAdapter(
     private val listner: (UserItems, Int) -> Unit
@@ -39,16 +40,20 @@ class APIFragmentAdapter(
 }
 
 class UserHolder(binding : RowApiBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val TAG = UserHolder::class.java.simpleName
+
     val userBinding = binding
 
     fun bind(item: Any, listnerr: (item: UserItems, res: Int) -> Unit) {
         if (item is UserItems){
             userBinding.user = item
             userBinding.mLikeBtn.setOnClickListener{
-                listnerr(item, userBinding.mLikeBtn.id)
+                EventBus.getDefault().post(item)
+//                listnerr(item, userBinding.mLikeBtn.id)
             }
             userBinding.rowRoot.setOnClickListener{
-                listnerr(item, userBinding.rowRoot.id)
+                EventBus.getDefault().post(item)
+//                listnerr(item, userBinding.rowRoot.id)
             }
             userBinding.executePendingBindings()
 

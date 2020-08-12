@@ -2,6 +2,7 @@ package com.sumin.aactest.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ import com.sumin.aactest.databinding.FragmentApiBinding
 import com.sumin.aactest.utilities.InjectorUtils
 import com.sumin.aactest.viewmodel.APIViewModel
 import kotlinx.android.synthetic.main.fragment_api.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class APIFragment : Fragment() {
     val TAG: String = APIFragment::class.java.simpleName
@@ -43,6 +47,8 @@ class APIFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        EventBus.getDefault().register(this)
+
         val apiAdapter =
             APIFragmentAdapter { item: UserItems, res: Int ->
 
@@ -60,13 +66,24 @@ class APIFragment : Fragment() {
                     }
 
                     R.id.rowRoot -> {
-                        startWebActivity(item.html_url, item.login)
+//                        startWebActivity(item.html_url, item.login)
                     }
                 }
             }
         mApiRecycler.apply {
             adapter = apiAdapter
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onClickEvent(item: UserItems){
+        Log.e(TAG, "onClickEvent")
+        startWebActivity(item.html_url, item.login)
     }
 
     fun startWebActivity(htmlUrl: String, title: String){
