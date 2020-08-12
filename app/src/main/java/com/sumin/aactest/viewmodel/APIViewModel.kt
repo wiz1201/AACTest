@@ -24,10 +24,14 @@ class APIViewModel(
     private val _userItems = MutableLiveData<List<UserItems>>()
     val userItems : LiveData<List<UserItems>> = _userItems
 
+    private val _userRxItems = MutableLiveData<List<UserItems>>()
+    val userRxItems : LiveData<List<UserItems>> = _userRxItems
+
     private val _query = MutableLiveData<String>()
     val query : MutableLiveData<String> = _query
 
-    val userResult : LiveData<List<User>> =  local.getAllUsers()
+    private val  _userResult = MutableLiveData<List<User>>()
+    val userResult : LiveData<List<User>> = _userResult
 
     private val _isLike = MutableLiveData<Boolean>()
     val isLike : LiveData<Boolean> = _isLike
@@ -50,7 +54,7 @@ class APIViewModel(
                     Log.e(TAG, "Rx성공 : $userResponse")
                     val items : List<UserItems>? = userResponse.items
                     Log.e(TAG, "Rx성공 : ${items?.size}")
-                    _userItems.postValue(items)
+                    _userRxItems.postValue(items)
 
                 }, { thowable ->
                     Log.d(TAG, "Rx실패 : ${thowable.message}")
@@ -63,6 +67,13 @@ class APIViewModel(
         local.insert(user)
     }
 
+    fun getAllUsers(){
+        Log.e(TAG, "getAllUsers")
+        CoroutineScope(Dispatchers.IO).launch {
+           _userResult.postValue(local.getAllUsers())
+        }
+    }
+
     fun searchUser(userName: String) {
         Log.e("API", "searchUser${userName}")
 //        _userResult.postValue(findUser(userName))
@@ -71,5 +82,12 @@ class APIViewModel(
     fun clickLike(login : String){
         Log.e("TEST", "$login : clickLike")
 //        _isLike.value = !isLike.value!!
+    }
+
+    fun findUser(user: String) {
+        Log.e(TAG, "findUser : ${user}")
+        CoroutineScope(Dispatchers.IO).launch {
+            _userResult.postValue(local.findUser(user))
+        }
     }
 }

@@ -4,7 +4,9 @@ import androidx.annotation.WorkerThread
 
 class LocalReposirtory(private val usersDao : UserDao) {
 
-    fun getAllUsers() = usersDao.getUserAll()
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getAllUsers() = usersDao.getUserAll()
 
     /**
      * Local DB에서 유져검색
@@ -12,9 +14,7 @@ class LocalReposirtory(private val usersDao : UserDao) {
      * */
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun findUser(userName: String) {
-        usersDao.findUser(userName)
-    }
+    suspend fun findUser(userName: String) = usersDao.findUser(userName)
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

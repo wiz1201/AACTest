@@ -1,6 +1,7 @@
 package com.sumin.aactest.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.sumin.aactest.viewmodel.APIViewModel
 import kotlinx.android.synthetic.main.fragment_local.*
 
 class LocalFragment : Fragment() {
+    private val TAG = LocalFragment::class.java.simpleName
 
     private lateinit var binding : FragmentLocalBinding
     val model : APIViewModel by activityViewModels{
@@ -42,5 +44,11 @@ class LocalFragment : Fragment() {
         mLocalRecycler.apply {
             adapter = localAdapter
         }
+        getAllUsersLocal()
+    }
+
+    fun getAllUsersLocal(){
+        Log.e(TAG, "getAllUsersLocal")
+        model.getAllUsers()
     }
 }
